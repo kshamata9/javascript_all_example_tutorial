@@ -1,0 +1,56 @@
+<html>
+<body>
+
+<p id="demo"></p>
+
+<script>
+/* ****************************
+ * * Variable hosting giving error if you used the Block Scope variable (let, const) in JavaScript 
+ * * Two types of hoisting Variable and function hosting
+ * * Hoisting is aso run for function not for class in javscript
+**************************** */
+
+ /* *Variable Hoisting* */
+
+/* 
+* Example 1
+*/
+// use test variable before declaring
+console.log(test);// declare and initialize test variable// Output: undefined
+var test = 5;
+
+/* 
+* Example 2
+*/
+x = 5; // Assign 5 to x
+elem = document.getElementById("demo"); // Find an element 
+elem.innerHTML = x;           // Display x in the element
+var x; // Declare x
+
+/*
+* Example 3
+*/
+// use the message variable before declaration
+console.log(message);
+let message;// variable declaration using let keyword
+//Output : ReferenceError: Cannot access 'message' before initialization
+
+ /* *Function Hoisting* */
+
+/*
+* Example1
+*/
+// function call
+greeting();
+// function declaration
+function greeting() {
+    console.log("Welcome to Programiz.");
+}
+//Output: Welcome to Programiz
+
+
+
+</script>
+
+</body>
+</html> 
