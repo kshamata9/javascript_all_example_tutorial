@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Javascript Function</title>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <h1>Function</h1>
+    <p>
+      A JavaScript function is a block of code designed to perform a particular
+      task.
+    </p>
+    <p>
+      A JavaScript function is executed when "something" invokes it (calls it).
+    </p>
+    <p>
+      Function parameters are listed inside the parentheses () in the function
+      definition.
+    </p>
+    <p>
+      Function arguments are the values received by the function when it is
+      invoked.
+    </p>
+    <p>
+      Inside the function, the arguments (the parameters) behave as local
+      variables.
+    </p>
+    <h1>Function Invocation</h1>
+    <p>
+      The code inside the function will execute when "something" invokes (calls)
+      the function:
+    </p>
+    <ul>
+      <li>When an event occurs (when a user clicks a button)</li>
+      <li>When it is invoked (called) from JavaScript code</li>
+      <li>Automatically (self invoked)</li>
+    </ul>
+    <pre>
+function f(a,b,c) // 3 parameters f(1) // 1 argument given; inside the
+      function f, a will be 1, and b and c will be undefined
+      function add (parameter1 , parameter2 ) { return parameter1 + parameter2;
+      } add(10 (argument 1), 20 (argument2 ))
+    </pre>
+
+    <h3>What is the use of a constructor function in JavaScript?</h3>
+    <p>
+      A constructor function is a special type of function that is used to
+      create objects. Constructor functions are used to define the properties
+      and methods of an object.
+    </p>
+    <p>
+      Constructor functions are used to create objects in javascript. When do we
+      use constructor functions?
+    </p>
+    <pre>
+      // Constructor function for Person objects 
+      function Person(first, last, age, eye) { 
+        this.firstName = first; 
+        this.lastName = last; 
+        this.age = age;
+      this.eyeColor = eye; 
+      this.nationality = "English"; 
+    } // Create 2 Person objects 
+      const myFather = new Person("John", "Doe", 50, "blue"); 
+      const myMother = new Person("Sally", "Rally", 48, "green"); // Display nationality 
+      document.getElementById("demo").innerHTML =JSON.stringify(myFather); 
+      document.getElementById("demo1").innerHTML =JSON.stringify(myMother);
+    </pre>
+
+    <h3>What are arrow functions?</h3>
+    <p>
+      Arrow functions were introduced in the ES6 version of javascript. They
+      provide us with a new and shorter syntax for declaring functions. Arrow
+      functions can only be used as a function expression.
+    </p>
+    <p>
+      Arrow functions are declared without the function keyword. If there is
+      only one returning expression then we don’t need to use the return keyword
+      as well in an arrow function as shown in the example above. Also, for
+      functions having just one line of code, curly braces { } can be omitted.
+    </p>
+    <pre>
+        // Traditional function expression
+var multiplyBy2 = function(num){
+  return num * 2;
+}
+// Arrow function expression
+var arrowMultiplyBy2 = num => num * 2;
+    </pre>
+
+    <h3>Callback is a Function</h3>
+    <p>
+      A callback is a function that will be executed after another function gets
+      executed. In javascript, functions are treated as first-class citizens,
+      they can be used as an argument of another function, can be returned by
+      another function, and can be used as a property of an object.
+    </p>
+    <p>
+      Functions that are used as an argument to another function are called
+      callback functions.
+    </p>
+    <pre>
+function divideByHalf(sum){
+  console.log(Math.floor(sum / 2));
+}
+
+function multiplyBy2(sum){
+  console.log(sum * 2);
+}
+
+function operationOnSum(num1,num2,operation){
+  var sum = num1 + num2;
+  operation(sum);
+}
+
+operationOnSum(3, 3, divideByHalf); // Outputs 3
+
+operationOnSum(5, 5, multiplyBy2); // Outputs 20
+</pre
+    >
+  </body>
+</html>

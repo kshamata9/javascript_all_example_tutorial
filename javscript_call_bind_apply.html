@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Call. bind, apply javascript</title>
+    <script></script>
+  </head>
+  <body>
+    <div>
+      <b>Global Context:</b> When a function is called in the global context
+      (e.g., in a browser window), this represents the global object (window).
+      <pre>console.log(this === window); // true</pre>
+    </div>
+    <div>
+      <b>Function Context:</b> When a function is called as a method of an
+      object, this represents that object.
+      <pre>
+        const obj = {
+        name: "Object",
+        logName() {
+            console.log(this.name);
+        }
+        };
+        obj.logName(); // Output: Object
+    </pre
+      >
+    </div>
+    <div>
+      <b>Event Handlers:</b> Inside an event handler, this represents the
+      element that triggered the event.
+      <pre>
+document.querySelector("#button").addEventListener("click", function() {
+  console.log(this); // "this" represents the #button element
+});</pre
+      >
+    </div>
+
+    <div>
+      <b>Constructor Functions:</b> Inside a constructor function, this
+      represents the newly created object.
+      <pre>
+function Person(name) {
+  this.name = name;
+}
+
+const person1 = new Person("Ozan");
+console.log(person1.name); // Output: Ozan
+</pre
+      >
+    </div>
+
+    <table width="100%" border="1" cellpadding="0" cellspacing="0">
+      <tr style="text-align: center">
+        <td width="150"></td>
+        <td>Call</td>
+        <td>Apply</td>
+        <td>Bind</td>
+      </tr>
+      <tr>
+        <td>Basic Usage</td>
+        <td>function.call(object, arg1, arg2, ...);</td>
+        <td>function.apply(object, [arg1, arg2, ...]);</td>
+        <td>
+          const boundFunction = function.bind(object); <br />
+          boundFunction(arg1, arg2, ...);
+        </td>
+      </tr>
+
+      <tr>
+        <td>Passing Arguments</td>
+        <td>
+          The apply() method, like call(), is used to invoke a function with a
+          specific context. The difference is that arguments are passed
+        </td>
+        <td>
+          The apply() method, like call(), is used to invoke a function with a
+          specific context. The difference is that arguments are passed as an
+          array.
+        </td>
+        <td>
+          The bind() method creates a new function that, when called, has its
+          this keyword set to the provided value.
+        </td>
+      </tr>
+
+      <tr>
+        <td>Example 1:</td>
+        <td>
+          <pre>
+const obj1 = {
+            number1: 20,
+            number2: 50
+          };
+          
+          function totalNumber(num1, num2) {
+            console.log(this.number1 + this.number2 + num1 + num2);
+          }
+          
+          totalNumber.call(obj1, 40, 60); // Output: 170
+          </pre>
+        </td>
+        <td>
+          <pre>
+const obj1 = {
+            number1: 20,
+            number2: 50
+          };
+          
+          function totalNumber(num1, num2) {
+            console.log(this.number1 + this.number2 + num1 + num2);
+          }
+          
+          totalNumber.apply(obj1, [40, 60]); // Output: 170
+          </pre>
+        </td>
+        <td>
+          <pre>
+const obj2 = {
+            number1: 60,
+            number2: 120
+          };
+          
+          function totalNumber(num1, num2) {
+            console.log(this.number1 + this.number2 + num1 + num2);
+          }
+          
+          const bindFunction = totalNumber.bind(obj2);
+          bindFunction(50, 110); // Output: 340
+          </pre>
+        </td>
+      </tr>
+
+      <tr>
+        <td>Example 2</td>
+        <td>
+          <pre>
+const user = {
+            name: "Reader",
+            greet(greeting) {
+              console.log(`${greeting}, ${this.name}!`);
+            }
+          };
+          
+          user.greet.call(user, "Hello"); // Output: Hello, Reader!
+          
+          const admin = {
+            name: "Admin"
+          };
+          
+          user.greet.call(admin, "Hello"); // Output: Hello, Admin!
+          </pre>
+        </td>
+        <td>
+          <pre>
+const obj1 = { number: 10 };
+
+            function doubleNumber(x) {
+              console.log(this.number * x);
+            }
+            
+            doubleNumber.apply(obj1, [5]); // Output: 50
+            </pre
+          >
+        </td>
+        <td>
+          <pre>
+const obj1 = {
+                message: "Hello World!",
+                greet: function () {
+                  console.log(this.message);
+                }
+              };
+              
+              const obj2 = {
+                message: "Hello Universe!"
+              };
+              
+              const greetLater = obj1.greet.bind(obj2);
+              greetLater(); // Output: Hello Universe!
+              
+              const greetLater2 = obj1.greet.bind(obj1);
+              greetLater2(); // Output: Hello World!</pre
+          >
+        </td>
+      </tr>
+
+      <tr>
+        <td>Example 3</td>
+        <td>
+          <pre>
+function sum(a, b) {
+            return this.base + a + b;
+          }
+          
+          const context = { base: 10 };
+          
+          const result = sum.call(context, 5, 7); // Output: 22
+          </pre>
+        </td>
+        <td>
+          <pre>
+const calculator = {
+            addNumbers: function (num1, num2) {
+              console.log(`Total: ${this.result + num1 + num2}`);
+            },
+            result: 10
+          };
+          
+          const numbersToAdd = [5, 7];
+          
+          calculator.addNumbers.apply(calculator, numbersToAdd); // Output: Total: 22</pre
+          >
+        </td>
+        <td>
+          <pre>
+const obj2 = {
+            number1: 60,
+            number2: 120
+          };
+          
+          function totalNumber(num1, num2) {
+            console.log(this.number1 + this.number2 + num1 + num2);
+          }
+          
+          const bindFunction = totalNumber.bind(obj2);
+          bindFunction(50, 110); // Output: 340
+          </pre>
+        </td>
+      </tr>
+
+      <tr>
+        <td>Example 4</td>
+        <td>
+          <pre>
+function sum() {
+            let total = 0;
+            for (let i = 0; i < arguments.length; i++) {
+              total += arguments[i];
+            }
+            this.result = total;
+          }
+          
+          sum.call(null, 3, 7, 5, 2, 8);
+          console.log(result); // Output: 25</pre
+          >
+        </td>
+        <td>
+          <pre>
+const numbers = [3, 7, 5, 2, 8];
+
+            function sum() {
+              let total = 0;
+              for (let i = 0; i < arguments.length; i++) {
+                total += arguments[i];
+              }
+              this.result = total;
+            }
+            
+            sum.apply(null, numbers);
+            console.log(result); // Output: 25
+            </pre
+          >
+        </td>
+        <td></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td colspan="3">
+          <pre>
+                const obj1 = {
+                    first: 20,
+                    second: 50
+                  };
+                  
+                  const obj2 = {
+                    first: 60,
+                    second: 120
+                  };
+                  
+                  function totalNumber(arg1, arg2) {
+                    console.log(this.first + this.second + arg1 + arg2);
+                  }
+                  
+                  totalNumber(40); // NaN
+                  
+                  totalNumber.call(obj1, 40, 60); // Output: 170
+                  
+                  totalNumber.apply(obj1, [40, 60]); // Output: 170
+                  
+                  const bindFunction = totalNumber.bind(obj2);
+                  
+                  bindFunction(50, 110); // Output: 340
+                  
+            </pre
+          >
+        </td>
+      </tr>
+    </table>
+    <div id="call_bind_apply"></div>
+  </body>
+</html>

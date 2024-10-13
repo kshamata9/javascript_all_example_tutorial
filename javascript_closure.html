@@ -1,0 +1,87 @@
+<html>
+  <head>
+    <title>Closures in JavaScript Explained with Examples</title>
+  </head>
+  <body>
+    <p>
+      A closure is the combination of a function bundled together (enclosed)
+      with references to its surrounding state (the lexical environment). When
+      you create a closure, you gain access to an outer function’s scope from an
+      inner function. Closures are automatically created every time a function
+      is defined in JavaScript.
+    </p>
+    /* * *Example 1 - calculation * Here no need to hidden field to save the
+    current state because cluster can memorized his last value */
+    <p id="cluster"></p>
+    <button onclick="cluster_object.add()">+2</button>
+    <button onclick="cluster_object.substract()">-2</button>
+    <button onclick="cluster_object.multiply()">*2</button>
+    <button onclick="cluster_object.divided()">/2</button>
+    <button onclick="cluster_object.clear()">clear</button>
+    <script>
+      /*
+       * *Example 1 - calculation
+       * Here no need to hidden field to save the current state  because cluster can memorized his last value
+       */
+      function cluster_function() {
+        let count = 0;
+        return {
+          add: function () {
+            count += 2;
+            document.getElementById("cluster").innerHTML = count;
+            return count;
+          },
+          substract: function () {
+            count -= 2;
+            document.getElementById("cluster").innerHTML = count;
+            return count;
+          },
+          multiply: function () {
+            count *= 2;
+            document.getElementById("cluster").innerHTML = count;
+            return count;
+          },
+          divided: function () {
+            count /= 2;
+            document.getElementById("cluster").innerHTML = count;
+            return count;
+          },
+          clear: function () {
+            count = 0;
+            document.getElementById("cluster").innerHTML = count;
+            return count;
+          },
+        };
+      }
+      const cluster_object = cluster_function();
+
+      /*
+       * *Example 1: Basic Closure.
+       */
+      function foo(outer_arg) {
+        function inner(inner_arg) {
+          return outer_arg + inner_arg;
+        }
+        return inner;
+      }
+      let get_func_inner = foo(5);
+
+      console.log(get_func_inner(4));//9
+      console.log(get_func_inner(3));//8
+
+
+      /**
+       * *Example 3
+       **/
+      function Test(cnt){
+        let point = cnt;
+        return function(){
+            return point;
+        }
+      }
+      console.log(Test(4)())
+      console.log(Test(9)())
+      console.log(Test()())
+    </script>
+  </body>
+</html>
